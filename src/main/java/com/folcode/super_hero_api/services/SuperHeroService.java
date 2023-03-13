@@ -22,6 +22,11 @@ public class SuperHeroService {
     }
 
     public List<SuperHeroDTO> findAll() {
-        return null;
+        List<SuperHeroEntity> superHeroEntities = superHeroRepository.findAll();
+
+        return superHeroEntities
+                .stream()
+                .map(superHeroMapper::superHeroEntityToSuperHeroDTO)
+                .collect(Collectors.toList());
     }
 }
