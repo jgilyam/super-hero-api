@@ -27,4 +27,8 @@ public class SuperHeroService {
                 .map(superHeroMapper::superHeroEntityToSuperHeroDTO)
                 .collect(Collectors.toList());
     }
+
+    public SuperHeroDTO findById(int i) {
+        return null;
+    }
 }
