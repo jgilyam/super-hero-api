@@ -14,8 +14,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 public class SuperHeroServiceTest {
@@ -48,6 +50,24 @@ public class SuperHeroServiceTest {
         Assertions.assertThat(superHeroesReturned.size()).isEqualTo(superHeroesExpected.size());
 
 
+    }
+    @Test
+    public void shouldReturnOneSuperHeroById(){
+        SuperHeroEntity mockEntity = Mockito.mock(SuperHeroEntity.class);
+        SuperHeroDTO mockDto = Mockito.mock(SuperHeroDTO.class);
+
+        Mockito
+                .when(superHeroRepositoryMock.findById(42))
+                .thenReturn(Optional.ofNullable(mockEntity));
+        Mockito
+                .when(superHeroMapperMock.superHeroEntityToSuperHeroDTO(mockEntity))
+                .thenReturn(mockDto);
+
+
+        SuperHeroDTO superHero = superHeroService.findById(42);
+
+        Assertions.assertThat(superHero)
+                .isSameAs(mockDto);
     }
 
 
