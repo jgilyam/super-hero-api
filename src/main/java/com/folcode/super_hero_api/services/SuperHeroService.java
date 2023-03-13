@@ -4,6 +4,8 @@ import com.folcode.super_hero_api.domain.dtos.SuperHeroDTO;
 import com.folcode.super_hero_api.domain.mappers.ISuperHeroMapper;
 import com.folcode.super_hero_api.domain.persistence.entities.SuperHeroEntity;
 import com.folcode.super_hero_api.domain.persistence.repositories.SuperHeroRepository;
+import com.folcode.super_hero_api.exceptions.SuperHeroNotFoundExceptions;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.parser.Entity;
@@ -28,10 +30,11 @@ public class SuperHeroService {
                 .collect(Collectors.toList());
     }
 
+    @SneakyThrows
     public SuperHeroDTO findById(int superHeroId) {
         return superHeroRepository
                 .findById(superHeroId)
                 .map(superHeroMapper::superHeroEntityToSuperHeroDTO)
-                .orElse(null);
+                .orElseThrow(SuperHeroNotFoundExceptions::new);
     }
 }

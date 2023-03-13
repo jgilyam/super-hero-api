@@ -80,7 +80,7 @@ public class SuperHeroServiceTest {
         Mockito
                 .when(superHeroRepositoryMock.findById(43))
                 .thenReturn(Optional.empty());
-        
+
         Assertions
                 .assertThatThrownBy(()->superHeroService.findById(43))
                 .isInstanceOf(SuperHeroNotFoundExceptions.class);
