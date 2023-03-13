@@ -28,7 +28,10 @@ public class SuperHeroService {
                 .collect(Collectors.toList());
     }
 
-    public SuperHeroDTO findById(int i) {
-        return null;
+    public SuperHeroDTO findById(int superHeroId) {
+        return superHeroRepository
+                .findById(superHeroId)
+                .map(superHeroMapper::superHeroEntityToSuperHeroDTO)
+                .orElse(null);
     }
 }
