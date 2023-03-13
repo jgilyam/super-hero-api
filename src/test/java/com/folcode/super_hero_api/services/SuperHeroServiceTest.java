@@ -4,6 +4,7 @@ import com.folcode.super_hero_api.domain.dtos.SuperHeroDTO;
 import com.folcode.super_hero_api.domain.mappers.ISuperHeroMapper;
 import com.folcode.super_hero_api.domain.persistence.entities.SuperHeroEntity;
 import com.folcode.super_hero_api.domain.persistence.repositories.SuperHeroRepository;
+import com.folcode.super_hero_api.exceptions.SuperHeroNotFoundExceptions;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,16 +27,17 @@ public class SuperHeroServiceTest {
     @Mock
     private ISuperHeroMapper superHeroMapperMock;
     private SuperHeroService superHeroService;
+
     @BeforeEach
-    public void setup(){
+    public void setup() {
         superHeroService = new SuperHeroService(superHeroRepositoryMock, superHeroMapperMock);
     }
 
     @Test
-    public void shouldReturnAllSuperHeroes(){
-        List<SuperHeroEntity> superHeroesExpected= new ArrayList<>();
-        superHeroesExpected.add(new SuperHeroEntity(1,"Spiderman",null,null,null,null));
-        superHeroesExpected.add(new SuperHeroEntity(2,"Spiderman2",null,null,null,null));
+    public void shouldReturnAllSuperHeroes() {
+        List<SuperHeroEntity> superHeroesExpected = new ArrayList<>();
+        superHeroesExpected.add(new SuperHeroEntity(1, "Spiderman", null, null, null, null));
+        superHeroesExpected.add(new SuperHeroEntity(2, "Spiderman2", null, null, null, null));
 
         Mockito
                 .when(superHeroRepositoryMock.findAll())
@@ -51,8 +53,9 @@ public class SuperHeroServiceTest {
 
 
     }
+
     @Test
-    public void shouldReturnOneSuperHeroById(){
+    public void shouldReturnOneSuperHeroById() {
         SuperHeroEntity mockEntity = Mockito.mock(SuperHeroEntity.class);
         SuperHeroDTO mockDto = Mockito.mock(SuperHeroDTO.class);
 
@@ -70,5 +73,17 @@ public class SuperHeroServiceTest {
                 .isSameAs(mockDto);
     }
 
+    @Test
+    public void shouldThrowSuperHeroNotFoundException() {
+        SuperHeroEntity mockEntity = Mockito.mock(SuperHeroEntity.class);
 
+        Mockito
+                .when(superHeroRepositoryMock.findById(43))
+                .thenReturn(Optional.empty());
+        
+        Assertions
+                .assertThatThrownBy(()->superHeroService.findById(43))
+                .isInstanceOf(SuperHeroNotFoundExceptions.class);
+
+    }
 }
