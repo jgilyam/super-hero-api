@@ -7,10 +7,7 @@ import org.hibernate.Hibernate;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class SuperHeroEntity {
@@ -34,16 +31,4 @@ public class SuperHeroEntity {
     @Column(name = "species")
     private String species;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        SuperHeroEntity that = (SuperHeroEntity) o;
-        return id != null && Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
