@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface SuperHeroRepository extends JpaRepository<SuperHeroEntity,Integer>, JpaSpecificationExecutor<SuperHeroEntity> {
-    List<SuperHeroEntity> findAllByName(String name);
 }
