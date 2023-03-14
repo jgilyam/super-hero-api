@@ -4,6 +4,7 @@ import com.folcode.super_hero_api.domain.dtos.SuperHeroDTO;
 import com.folcode.super_hero_api.domain.mappers.ISuperHeroMapper;
 import com.folcode.super_hero_api.domain.persistence.entities.SuperHeroEntity;
 import com.folcode.super_hero_api.domain.persistence.repositories.SuperHeroRepository;
+import com.folcode.super_hero_api.domain.persistence.specifications.ISuperHeroSpecification;
 import com.folcode.super_hero_api.domain.persistence.specifications.SuperHeroSpecification;
 import com.folcode.super_hero_api.exceptions.SuperHeroBadRequestExceptions;
 import com.folcode.super_hero_api.exceptions.SuperHeroNotFoundExceptions;
@@ -11,8 +12,6 @@ import lombok.SneakyThrows;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.security.PublicKey;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,9 +20,9 @@ import java.util.stream.Collectors;
 public class SuperHeroService {
     private final SuperHeroRepository superHeroRepository;
     private final ISuperHeroMapper superHeroMapper;
-    private final SuperHeroSpecification superHeroSpecifications;
+    private final ISuperHeroSpecification superHeroSpecifications;
 
-    public SuperHeroService(SuperHeroRepository superHeroRepository, ISuperHeroMapper superHeroMapper, SuperHeroSpecification superHeroSpecifications) {
+    public SuperHeroService(SuperHeroRepository superHeroRepository, ISuperHeroMapper superHeroMapper, ISuperHeroSpecification superHeroSpecifications) {
         this.superHeroRepository = superHeroRepository;
         this.superHeroMapper = superHeroMapper;
         this.superHeroSpecifications = superHeroSpecifications;
