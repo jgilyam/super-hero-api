@@ -10,6 +10,7 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "super_heroes")
 public class SuperHeroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
