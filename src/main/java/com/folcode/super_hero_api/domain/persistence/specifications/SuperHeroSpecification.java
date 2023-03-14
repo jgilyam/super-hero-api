@@ -37,6 +37,6 @@ public class SuperHeroSpecification {
     }
 
     private Predicate namePredicate(Root<SuperHeroEntity> root, CriteriaBuilder criteriaBuilder, String name) {
-        return criteriaBuilder.like(criteriaBuilder.lower(root.get("")).as(String.class), "%"+name.toLowerCase()+"%");
+        return criteriaBuilder.like(criteriaBuilder.lower(root.get("name")).as(String.class), "%"+name.toLowerCase()+"%");
     }
 }
