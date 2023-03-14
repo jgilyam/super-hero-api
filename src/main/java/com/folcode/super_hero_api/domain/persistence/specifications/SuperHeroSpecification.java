@@ -16,7 +16,7 @@ import java.util.Optional;
 
 
 @Service
-public class SuperHeroSpecification {
+public class SuperHeroSpecification implements ISuperHeroSpecification {
     public Specification<SuperHeroEntity> findAll(String name) {
         return (root, query, criteriaBuilder) -> findByAllQueryBuilder(root, criteriaBuilder, name);
     }
