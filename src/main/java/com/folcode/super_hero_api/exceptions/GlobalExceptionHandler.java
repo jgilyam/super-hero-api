@@ -20,4 +20,10 @@ public class GlobalExceptionHandler {
         ApiExceptionResponse error = new ApiExceptionResponse(HttpStatus.NOT_FOUND, exception.getClass().toString(), exception.getMessage());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(SuperHeroBadRequestExceptions.class)
+    public ResponseEntity<ApiExceptionResponse> SuperHeroBadRequestExceptionsHandler(SuperHeroBadRequestExceptions exception, HttpServletRequest request) {
+        ApiExceptionResponse error = new ApiExceptionResponse(HttpStatus.BAD_REQUEST, exception.getClass().toString(), exception.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }
